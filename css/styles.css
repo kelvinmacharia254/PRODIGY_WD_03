@@ -1,0 +1,20 @@
+/* basic normalization */
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size:62.5%;
+}
+/* General size */
+body{
+    min-height: 105vh; /* exceeds 100vh to allow scrolling to demonstrate the nav is fixed */
+    font-family:Consolas, Arial, sans-serif;
+    font-size: 1.6em;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+}
+

@@ -101,7 +101,7 @@ main {
     margin: 1rem auto;
 }
 
-/* ||       main container */
+/* ||       main content container */
 #container {
     display: flex;
     flex-direction: column;
@@ -110,21 +110,30 @@ main {
     border-radius: 2rem;
     background-color: #ffffff;
     width: 100%;
-    max-width: 50rem;
+    min-width: 50rem;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ||       Form styling */
-form {
+/* ||       change-name container  */
+#change-name {
     display: flex;
     justify-content: space-between;
+    gap:1rem;
+    width: 100%;
     border: 1px solid #4b4453;
     border-radius: 2rem;
     padding: 2rem;
 }
 
-/* ||       Form elements */
-form input {
+#container p{
+    margin-top: 1rem;
+    padding: 0 1rem;
+    color: #fafafa;
+    background-color: #ffd500;
+}
+
+/* ||       change-name input  */
+#change-name input {
     background-color: #f3f1ed;
     color: #2f2e41;
     padding: 1rem;
@@ -134,13 +143,31 @@ form input {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+#player1, #player2 {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust as needed */
+}
+
+/* ||       change-name buttons */
+button{
+    padding: 0.5rem 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #4b4453;
+    color: #f3f1ed;
+}
+
+/* || main container board*/
 #board{
     margin-top: 1rem;
     border: 1px solid #4b4453;
     border-radius: 2rem;
     width: 100%;
     min-height: 30rem;
-    max-height: 30rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -154,6 +181,7 @@ form input {
     justify-content: center; /* Horizontally center content */
     align-items: center; /* Vertically center content */
     border-radius: 1rem; /* Rounded corners for a smoother look */
+    font-size: 4rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some depth with shadow */
 }
 
@@ -168,7 +196,7 @@ footer {
 }
 
 /* Responsive layout */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     form {
         width: 90%;
     }

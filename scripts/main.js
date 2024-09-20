@@ -17,14 +17,15 @@ let editMode = false;
 let editInput;
 let saveBtn;
 let playerDiv;
-let currentPlayer; // track current player
+let currentPlayerEditName = "player1"; // track current player
+let currentPlayerPlaytime = "player1"; // track current player
 
 
 function switchEditMode(e) {
     const isPlayer1 = e.target.id === 'edit-player1'; // check if edit player!
     console.log(isPlayer1);
-    currentPlayer = isPlayer1? "player1" : "player2"; // select player
-    console.log(currentPlayer);
+    currentPlayerEditName = isPlayer1? "player1" : "player2"; // select player
+    console.log(currentPlayerEditName);
 
     if(!editMode){
         editMode = true;
@@ -49,23 +50,22 @@ function switchEditMode(e) {
     }
 }
 
-
 function saveName() {
     editMode = false;
     // Clear the div content
     playerDiv.innerHTML = ""
 
     // Set the player name or default if input is empty
-    const playerName = editInput.value !== "" ? editInput.value : "Player 1";
+    const playerName = editInput.value !== "" ? editInput.value:  (currentPlayerEditName === "player1" ? "Player1" : "Player2")
     playerDiv.innerHTML = `<label>${playerName}</label>`;
 
     // Save player name in global variable
-    PLAYERS[currentPlayer] = playerName;
+    PLAYERS[currentPlayerEditName] = playerName;
     console.log(PLAYERS);
 
     // update status
 
-    // paraStatus.textContent = currentPlayer === "player1" ? `${PLAYERS["player1"]}'s turn!!` : `${PLAYERS["player2"]}'s turn`;
+    // paraStatus.textContent = currentPlayerEditName === "player1" ? `${PLAYERS["player1"]}'s turn!!` : `${PLAYERS["player2"]}'s turn`;
 
     // Recreate the edit button and attach its event listener
     editPlayer1Button = document.createElement("button");
@@ -84,7 +84,15 @@ editPlayer2Button.addEventListener('click',switchEditMode)
 tiles.forEach(tile => {
     tile.addEventListener('click', (e) => {
         if(!tile.textContent){
-            tile.textContent = 'X';
+            if(currentPlayerPlaytime === "player1") {
+                 console.log(currentPlayerPlaytime)
+                tile.textContent = 'X';
+                currentPlayerPlaytime = "player2";
+            }else {
+                console.log(currentPlayerPlaytime)
+                tile.textContent = "O"
+                currentPlayerPlaytime = "player1"
+            }
         }
     })
 })

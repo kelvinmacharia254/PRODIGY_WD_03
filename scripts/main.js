@@ -4,11 +4,11 @@ let editPlayer1Button = document.querySelector('#edit-player1');
 const editPlayer2Button = document.querySelector('#edit-player2');
 const editPlayer1Div = document.querySelector('#player1');
 const editPlayer2Div = document.querySelector('#player2');
-
+const paraStatus = document.querySelector('#container p');
 // global vars
 const PLAYERS ={
-    player1:"player1",
-    player2:"player2",
+    "player1":"player1",
+    "player2":"player2",
 }
 
 let editMode = false;
@@ -18,6 +18,8 @@ let editInput;
 let saveBtn;
 let playerDiv;
 let currentPlayer; // track current player
+
+
 function switchEditMode(e) {
     const isPlayer1 = e.target.id === 'edit-player1'; // check if edit player!
     console.log(isPlayer1);
@@ -56,6 +58,14 @@ function saveName() {
     // Set the player name or default if input is empty
     const playerName = editInput.value !== "" ? editInput.value : "Player 1";
     playerDiv.innerHTML = `<label>${playerName}</label>`;
+
+    // Save player name in global variable
+    PLAYERS[currentPlayer] = playerName;
+    console.log(PLAYERS);
+
+    // update status
+
+    // paraStatus.textContent = currentPlayer === "player1" ? `${PLAYERS["player1"]}'s turn!!` : `${PLAYERS["player2"]}'s turn`;
 
     // Recreate the edit button and attach its event listener
     editPlayer1Button = document.createElement("button");

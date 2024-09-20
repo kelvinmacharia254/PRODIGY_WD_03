@@ -63,10 +63,6 @@ function saveName() {
     PLAYERS[currentPlayerEditName] = playerName;
     console.log(PLAYERS);
 
-    // update status
-
-    // paraStatus.textContent = currentPlayerEditName === "player1" ? `${PLAYERS["player1"]}'s turn!!` : `${PLAYERS["player2"]}'s turn`;
-
     // Recreate the edit button and attach its event listener
     editPlayer1Button = document.createElement("button");
     editPlayer1Button.textContent = "Edit";
@@ -88,11 +84,13 @@ tiles.forEach(tile => {
                  console.log(currentPlayerPlaytime)
                 tile.textContent = 'X';
                 currentPlayerPlaytime = "player2";
+
             }else {
                 console.log(currentPlayerPlaytime)
                 tile.textContent = "O"
                 currentPlayerPlaytime = "player1"
             }
+            paraStatus.textContent = currentPlayerPlaytime === "player1" ? `${PLAYERS["player1"]}'s turn!!` : `${PLAYERS["player2"]}'s turn`;
         }
     })
 })

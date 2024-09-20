@@ -9,37 +9,37 @@
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">
-                <a href="#home">Prodigy InfoTech</a>
-            </div>
-            <ul>
-                <li  class="lg-menu"><a href="#home">Home</a></li>
-                <li  class="lg-menu"><a href="#about">About</a></li>
-                <li  class="lg-menu"><a href="#contacts">Contacts</a></li>
-                <li>
-                     <a id="toggle-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
-                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="sm-menu">
-                <li class ="close-side-bar"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></li>
-                <li class ="close-side-bar"><a href="#home">Home</a></li>
-                <li class ="close-side-bar"><a href="#about">About</a></li>
-                <li class ="close-side-bar"><a href="#contacts">Contacts</a></li>
-            </ul>
-        </nav>
+        <h2>Tic Tac Toe</h2>
+        <h4>Prodigy Infotech Task 03</h4>
     </header>
         <main>
+            <div id="container">
+                <form>
+                    <div class="player">
+                        <label for="player1">Player 1: </label>
+                        <input type="text" name="player1-name" id="player1">
+                    </div>
+                    <div class="player">
+                        <label for="player2">Player 1: </label>
+                        <input type="text" name="player2-name" id="player2">
+                    </div>
+                </form>
+                <div id="board">
+                    <div id="r0-0"  class="tile"></div>
+                    <div id="r0-1"  class="tile"></div>
+                    <div id="r0-2"  class="tile"></div>
+                    <div id="r1-0"  class="tile"></div>
+                    <div id="r1-1"  class="tile"></div>
+                    <div id="r1-2"  class="tile"></div>
+                    <div id="r2-0"  class="tile"></div>
+                    <div id="r2-1"  class="tile"></div>
+                    <div id="r2-2"  class="tile"></div>
+                </div>
+            </div>
         </main>
         <footer>
             <div>
                 &copy; 2024, All rights reserved <br>
-                Task 01: Responsive Landing Page
             </div>
             <br>
             <div>Developer: Kelvin Macharia</div>

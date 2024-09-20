@@ -195,17 +195,3 @@ footer {
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive layout */
-@media (min-width: 768px) {
-    form {
-        width: 90%;
-    }
-
-    header {
-        font-size: 1.8rem;
-    }
-
-    footer {
-        font-size: 1.3rem;
-    }
-}

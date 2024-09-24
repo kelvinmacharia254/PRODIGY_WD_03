@@ -71,8 +71,24 @@ function saveName() {
 
     // Reattach the event listener to the new edit button
     editPlayer1Button.addEventListener('click', switchEditMode);
+
+    // update status text
+    updateStatusText()
 }
 
+function transitionText(text, target){
+    target.classList.add("fade-out");
+    setTimeout(()=> {
+        target.textContent = text;
+        target.classList.remove("fade-out");
+        target.classList.add("fade-in");
+    },500)
+}
+
+function updateStatusText(){
+    const statusText = currentPlayerPlaytime === "player1" ? `${PLAYERS["player1"]}'s turn!!` : `${PLAYERS["player2"]}'s turn`;
+    transitionText(statusText, paraStatus);
+}
 
 editPlayer1Button.addEventListener('click',switchEditMode)
 editPlayer2Button.addEventListener('click',switchEditMode)
@@ -90,7 +106,7 @@ tiles.forEach(tile => {
                 tile.textContent = "O"
                 currentPlayerPlaytime = "player1"
             }
-            paraStatus.textContent = currentPlayerPlaytime === "player1" ? `${PLAYERS["player1"]}'s turn!!` : `${PLAYERS["player2"]}'s turn`;
+            updateStatusText()
         }
     })
 })

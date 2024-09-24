@@ -76,9 +76,19 @@ main {
 
 #container p{
     margin-top: 1rem;
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem 0rem 1rem 0rem;
     color: #fafafa;
-    background-color: #ffd500;
+    background-color: #493545;
+    transition: opacity 0.5s ease;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
 }
 
 
@@ -113,7 +123,7 @@ button {
 }
 
 button:hover {
-    background-color: #694766; /* Darker green on hover */
+    background-color: #493545; /* Darker green on hover */
     color: #ffffff;
 }
 
@@ -139,6 +149,10 @@ button:hover {
     border-radius: 1rem; /* Rounded corners for a smoother look */
     font-size: 4rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some depth with shadow */
+}
+
+.tile:hover{
+    background-color: #493545;
 }
 
 /* || Footer styling */

@@ -5,6 +5,9 @@ const editPlayer2Button = document.querySelector('#edit-player2');
 const editPlayer1Div = document.querySelector('#player1');
 const editPlayer2Div = document.querySelector('#player2');
 const paraStatus = document.querySelector('#container p');
+const dialog = document.querySelector('dialog');
+const dialogPara = document.querySelector('dialog p');
+const dialogButton = document.querySelector('dialog button');
 
 // global vars
 const WINNNGCOMBINATIONS = [
@@ -83,11 +86,6 @@ function resetGame(){
         [null,null,null],
         [null,null,null],
     ]
-
-    PLAYERS ={
-        "player1":"player1",
-        "player2":"player2",
-    }
 
     editMode = false;
     winner = null;
@@ -182,13 +180,14 @@ function checkGameStatus(){
         console.log(firstSquareSymbol, secondSquareSymbol, thirdSquareSymbol);
         if ((firstSquareSymbol  !== null) && (firstSquareSymbol === secondSquareSymbol) && (firstSquareSymbol === thirdSquareSymbol)) {
             winner = firstSquare["player"];
-            console.log(`${winner} won. GameOver!!`);
+            dialogPara.textContent = `${winner} won. GameOver!!`;
+            dialog.showModal()
             break
             }
         }
         if(gameStatus.every(tile => tile.every(tile=> tile !== null))){
-            console.log("It is a draw. GameOver!!")
-            setTimeout(resetGame, 5000)
+            dialogPara.textContent = "It is a draw. GameOver!!"
+            dialog.showModal()
             console.log("Game has been restarted")
         }
 }
@@ -217,7 +216,7 @@ tiles.forEach(tile => {
             gameStatus[row][column] =
                 {
                     tile:{row: row, column: column},
-                    player:currentPlayerPlaytime,
+                    player:PLAYERS[currentPlayerPlaytime],
                     symbol:currentPlayerPlaytime === "player1"? "X":"O"
                 }
             //    switch player and symbol
@@ -239,6 +238,11 @@ tiles.forEach(tile => {
         // run last
         // logGlobalVars()
     })
+})
+
+dialogButton.addEventListener('click', () => {
+    dialog.close()
+    resetGame()
 })
 
 

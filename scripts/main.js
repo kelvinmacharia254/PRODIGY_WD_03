@@ -57,7 +57,7 @@ let gameStatus =
         [null,null,null],
     ]
 
-const PLAYERS ={
+let PLAYERS ={
     "player1":"player1",
     "player2":"player2",
 }
@@ -72,6 +72,33 @@ let playerDiv;
 let currentPlayerEditName = "player1"; // track current player edit mode
 let currentPlayerPlaytime = "player1"; // track a current player at during play
 
+
+function resetGame(){
+    tiles.forEach(tile => {
+        tile.textContent = ""
+    })
+    gameStatus =
+    [
+        [null,null,null],
+        [null,null,null],
+        [null,null,null],
+    ]
+
+    PLAYERS ={
+        "player1":"player1",
+        "player2":"player2",
+    }
+
+    editMode = false;
+    winner = null;
+
+    // dynamic elements
+    editInput = null;
+    saveBtn = null;
+    playerDiv = undefined;
+    currentPlayerEditName = "player1"; // track current player edit mode
+    currentPlayerPlaytime = "player1"; // track a current player at during play
+}
 function switchEditMode(e) {
     const isPlayer1 = e.target.id === 'edit-player1'; // check if edit player!
     // console.log(isPlayer1);
@@ -159,6 +186,11 @@ function checkGameStatus(){
             break
             }
         }
+        if(gameStatus.every(tile => tile.every(tile=> tile !== null))){
+            console.log("It is a draw. GameOver!!")
+            setTimeout(resetGame, 5000)
+            console.log("Game has been restarted")
+        }
 }
 
 function logGlobalVars(){
@@ -177,17 +209,18 @@ editPlayer2Button.addEventListener('click',switchEditMode)
 tiles.forEach(tile => {
     tile.addEventListener('click', (e) => {
         if(!tile.textContent){
-            // deliver tile coordinates
+            // derive tile coordinates from id
             let row = Number(e.target.id.slice(0,1))
             let column = Number(e.target.id.slice(1))
+
+            // update state if the board
             gameStatus[row][column] =
                 {
                     tile:{row: row, column: column},
                     player:currentPlayerPlaytime,
                     symbol:currentPlayerPlaytime === "player1"? "X":"O"
                 }
-
-
+            //    switch player and symbol
             if(currentPlayerPlaytime === "player1") {
                  // console.log(currentPlayerPlaytime)
                 tile.textContent = 'X';
@@ -198,7 +231,9 @@ tiles.forEach(tile => {
                 currentPlayerPlaytime = "player1"
             }
         }
+        // let player know their turn
         updateStatusText()
+        // check game status
         checkGameStatus()
 
         // run last

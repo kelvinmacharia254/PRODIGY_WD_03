@@ -5,27 +5,78 @@ const editPlayer2Button = document.querySelector('#edit-player2');
 const editPlayer1Div = document.querySelector('#player1');
 const editPlayer2Div = document.querySelector('#player2');
 const paraStatus = document.querySelector('#container p');
+
 // global vars
+const WINNNGCOMBINATIONS = [
+    [
+        { row: 0, column: 0 },
+        { row: 0, column: 1 },
+        { row: 0, column: 2 },
+    ],
+    [
+        { row: 1, column: 0 },
+        { row: 1, column: 1 },
+        { row: 1, column: 2 },
+    ],
+    [
+        { row: 2, column: 0 },
+        { row: 2, column: 1 },
+        { row: 2, column: 2 },
+    ],
+    [
+        { row: 0, column: 0 },
+        { row: 1, column: 0 },
+        { row: 2, column: 0 },
+    ],
+    [
+        { row: 0, column: 1 },
+        { row: 1, column: 1 },
+        { row: 2, column: 1 },
+    ],
+    [
+        { row: 0, column: 2 },
+        { row: 1, column: 2 },
+        { row: 2, column: 2 },
+    ],
+    [
+        { row: 0, column: 0 },
+        { row: 1, column: 1 },
+        { row: 2, column: 2 },
+    ],
+    [
+        { row: 0, column: 2 },
+        { row: 1, column: 1 },
+        { row: 2, column: 0 },
+    ]
+]
+
+let gameStatus =
+    [
+        [null,null,null],
+        [null,null,null],
+        [null,null,null],
+    ]
+
 const PLAYERS ={
     "player1":"player1",
     "player2":"player2",
 }
 
 let editMode = false;
+let winner;
 
 // dynamic elements
 let editInput;
 let saveBtn;
 let playerDiv;
-let currentPlayerEditName = "player1"; // track current player
-let currentPlayerPlaytime = "player1"; // track current player
-
+let currentPlayerEditName = "player1"; // track current player edit mode
+let currentPlayerPlaytime = "player1"; // track a current player at during play
 
 function switchEditMode(e) {
     const isPlayer1 = e.target.id === 'edit-player1'; // check if edit player!
-    console.log(isPlayer1);
+    // console.log(isPlayer1);
     currentPlayerEditName = isPlayer1? "player1" : "player2"; // select player
-    console.log(currentPlayerEditName);
+    // console.log(currentPlayerEditName);
 
     if(!editMode){
         editMode = true;
@@ -61,7 +112,7 @@ function saveName() {
 
     // Save player name in global variable
     PLAYERS[currentPlayerEditName] = playerName;
-    console.log(PLAYERS);
+    // console.log(PLAYERS);
 
     // Recreate the edit button and attach its event listener
     editPlayer1Button = document.createElement("button");
@@ -90,26 +141,71 @@ function updateStatusText(){
     transitionText(statusText, paraStatus);
 }
 
+
+function checkGameStatus(){
+    // check for a winner
+    for(let winCombinations of WINNNGCOMBINATIONS){
+        let firstSquare = gameStatus[winCombinations[0].row][winCombinations[0].column]
+        let secondSquare = gameStatus[winCombinations[1].row][winCombinations[1].column]
+        let thirdSquare = gameStatus[winCombinations[2].row][winCombinations[2].column]
+
+        let firstSquareSymbol = firstSquare === null? null:firstSquare["symbol"]
+        let secondSquareSymbol = secondSquare === null? null:secondSquare["symbol"]
+        let thirdSquareSymbol = thirdSquare === null? null:thirdSquare["symbol"]
+        console.log(firstSquareSymbol, secondSquareSymbol, thirdSquareSymbol);
+        if ((firstSquareSymbol  !== null) && (firstSquareSymbol === secondSquareSymbol) && (firstSquareSymbol === thirdSquareSymbol)) {
+            winner = firstSquare["player"];
+            console.log(`${winner} won. GameOver!!`);
+            break
+            }
+        }
+}
+
+function logGlobalVars(){
+    // log vars
+    console.log("**************logger*************");
+    console.log(PLAYERS)
+    console.log(gameStatus)
+    console.log(winner)
+    console.log("**************logger*************");
+}
+
+
 editPlayer1Button.addEventListener('click',switchEditMode)
 editPlayer2Button.addEventListener('click',switchEditMode)
 
 tiles.forEach(tile => {
     tile.addEventListener('click', (e) => {
         if(!tile.textContent){
+            // deliver tile coordinates
+            let row = Number(e.target.id.slice(0,1))
+            let column = Number(e.target.id.slice(1))
+            gameStatus[row][column] =
+                {
+                    tile:{row: row, column: column},
+                    player:currentPlayerPlaytime,
+                    symbol:currentPlayerPlaytime === "player1"? "X":"O"
+                }
+
+
             if(currentPlayerPlaytime === "player1") {
-                 console.log(currentPlayerPlaytime)
+                 // console.log(currentPlayerPlaytime)
                 tile.textContent = 'X';
                 currentPlayerPlaytime = "player2";
-
             }else {
-                console.log(currentPlayerPlaytime)
+                // console.log(currentPlayerPlaytime)
                 tile.textContent = "O"
                 currentPlayerPlaytime = "player1"
             }
-            updateStatusText()
         }
+        updateStatusText()
+        checkGameStatus()
+
+        // run last
+        // logGlobalVars()
     })
 })
+
 
 
 

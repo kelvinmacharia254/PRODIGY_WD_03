@@ -77,9 +77,11 @@ let currentPlayerPlaytime = "player1"; // track a current player at during play
 
 
 function resetGame(){
+    // reset board
     tiles.forEach(tile => {
         tile.textContent = ""
     })
+    // reset game status
     gameStatus =
     [
         [null,null,null],
@@ -181,13 +183,13 @@ function checkGameStatus(){
         if ((firstSquareSymbol  !== null) && (firstSquareSymbol === secondSquareSymbol) && (firstSquareSymbol === thirdSquareSymbol)) {
             winner = firstSquare["player"];
             dialogPara.textContent = `${winner} won. GameOver!!`;
-            dialog.showModal()
+            setTimeout(() => dialog.showModal(), 1000)
             break
             }
         }
         if(gameStatus.every(tile => tile.every(tile=> tile !== null))){
             dialogPara.textContent = "It is a draw. GameOver!!"
-            dialog.showModal()
+            setTimeout(() => dialog.showModal(), 1000)
             console.log("Game has been restarted")
         }
 }

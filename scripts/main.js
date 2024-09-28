@@ -98,6 +98,8 @@ function resetGame(){
     playerDiv = undefined;
     currentPlayerEditName = "player1"; // track current player edit mode
     currentPlayerPlaytime = "player1"; // track a current player at during play
+    //
+    updateStatusText()
 }
 function switchEditMode(e) {
     const isPlayer1 = e.target.id === 'edit-player1'; // check if edit player!
@@ -160,7 +162,7 @@ function transitionText(text, target){
         target.textContent = text;
         target.classList.remove("fade-out");
         target.classList.add("fade-in");
-    },500)
+    },200)
 }
 
 function updateStatusText(){
